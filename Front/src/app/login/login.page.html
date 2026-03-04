@@ -1,0 +1,90 @@
+<ion-content [fullscreen]="true">
+  <div class="main-container">
+    <div class="top-section ion-hide-sm-down">
+      <div class="logo-title-wrapper">
+        <div class="logo-bg">
+          <img src="assets/img/logo.jpg" alt="Logo">
+        </div>
+        <div class="company-title">
+          <h1>Sistema Antidoping</h1>
+          <p>Siete</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-section">
+      <div class="form-wrapper">
+        <div class="logo-bg ion-hide-sm-up">
+          <img src="assets/img/logo.jpg" alt="Logo">
+        </div>
+
+        <h2>Iniciar sesión</h2>
+
+        <form (ngSubmit)="onLogin()" #loginForm="ngForm" class="login-form">
+          <div class="input-group">
+            <label for="userName">Nombre</label>
+            <input
+              id="userName"
+              name="userName"
+              type="text"
+              placeholder="Ingresa tu nombre"
+              [(ngModel)]="userName"
+              class="input-field"
+              required
+            />
+          </div>
+
+          <div class="input-group">
+            <label>Base</label>
+            <ion-radio-group [(ngModel)]="base" name="base" required class="base-radio-group">
+              <div class="base-options">
+                <ion-item
+                  button
+                  lines="none"
+                  class="base-option"
+                  [class.selected]="base === 'base7'"
+                  (click)="base = 'base7'"
+                >
+                  <ion-radio value="base7" slot="start"></ion-radio>
+                  <ion-label>
+                    <div class="base-title">Base 7</div>
+                    <div class="base-subtitle">Selecciona esta base para capturas internas</div>
+                  </ion-label>
+                </ion-item>
+
+                <ion-item
+                  button
+                  lines="none"
+                  class="base-option"
+                  [class.selected]="base === 'clouthier'"
+                  (click)="base = 'clouthier'"
+                >
+                  <ion-radio value="clouthier" slot="start"></ion-radio>
+                  <ion-label>
+                    <div class="base-title">Clouthier</div>
+                    <div class="base-subtitle">Selecciona esta base para capturas externas</div>
+                  </ion-label>
+                </ion-item>
+              </div>
+            </ion-radio-group>
+          </div>
+
+        
+
+          <div class="button-wrapper">
+            <button type="submit" class="submit-button" [disabled]="loginForm.invalid">Entrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <ion-alert
+    [isOpen]="isAlertOpen"
+    header="Error"
+    [message]="alertMessage"
+    [buttons]="['OK']"
+    cssClass="custom-alert"
+    (didDismiss)="isAlertOpen = false"
+  ></ion-alert>
+</ion-content>

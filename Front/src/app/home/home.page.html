@@ -1,0 +1,104 @@
+
+
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="header-row">
+      <img class="header-logo" src="assets/img/logo.jpg" alt="Logo" />
+
+      <ion-button fill="clear" class="logout-button" (click)="logout()" aria-label="Cerrar sesión">
+        <ion-icon slot="icon-only" name="power-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="page">
+    <ion-card class="capture-card">
+      <ion-card-header>
+        <ion-card-title>Tomar foto</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p class="subtitle">Captura una imagen para analizarla con OCR.</p>
+
+        <div class="folio-group">
+          <label class="folio-label" for="folio">Número de folio</label>
+          <input
+            id="folio"
+            class="folio-input"
+            inputmode="numeric"
+            autocomplete="off"
+            pattern="[0-9]*"
+            type="text"
+            placeholder="Ej. 123456"
+            [value]="folio"
+            (input)="onFolioDomInput($event)"
+            (keydown)="onFolioKeyDown($event)"
+          />
+        </div>
+
+        <div *ngIf="isFolioValid" class="folio-status">
+          <ng-container *ngIf="isCheckingFolio">Validando folio...</ng-container>
+          <ng-container *ngIf="!isCheckingFolio && folioExists === false">Folio no encontrado en base de datos.</ng-container>
+          <ng-container *ngIf="!isCheckingFolio && folioEligible === false">Elige un folio correcto</ng-container>
+        </div>
+
+        <div *ngIf="folioExists === true && folioData" class="folio-details">
+          <div><strong>Nombre:</strong> {{ folioData.Nombre }}</div>
+          <div><strong>Departamento:</strong> {{ folioData.Departamento }}</div>
+          <div><strong>Resultado:</strong> {{ folioData.Resultado }}</div>
+        </div>
+
+        <input
+          #fileInput
+          class="file-input"
+          type="file"
+          accept="image/*"
+          capture="environment"
+          (change)="onFileSelected($event)"
+        />
+
+        <div class="actions">
+          <ion-button expand="block" class="primary" [disabled]="isCapturing || !isFolioValid" (click)="takePhoto()">
+            <ng-container *ngIf="!isCapturing; else loadingTpl">{{ photoDataUrl ? 'Cambiar foto' : 'Tomar foto' }}</ng-container>
+            <ng-template #loadingTpl>
+              <ion-spinner name="crescent"></ion-spinner>
+            </ng-template>
+          </ion-button>
+
+          <ion-button
+            *ngIf="photoDataUrl"
+            expand="block"
+            fill="outline"
+            class="secondary"
+            [disabled]="isCapturing || isSending"
+            (click)="clearPhoto()"
+          >
+            Quitar foto
+          </ion-button>
+
+          <ion-button expand="block" class="primary" [disabled]="!canSend" (click)="sendEmail()">
+            <ng-container *ngIf="!isSending; else sendingTpl">Enviar</ng-container>
+            <ng-template #sendingTpl>
+              <ion-spinner name="crescent"></ion-spinner>
+            </ng-template>
+          </ion-button>
+        </div>
+
+        <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+        <div *ngIf="successMessage" class="success">{{ successMessage }}</div>
+
+        <div class="preview" *ngIf="photoDataUrl; else emptyTpl">
+          <ion-img [src]="photoDataUrl"></ion-img>
+        </div>
+
+        <ng-template #emptyTpl>
+          <div class="empty">
+            Aún no hay foto. Toca el botón para capturar.
+          </div>
+        </ng-template>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

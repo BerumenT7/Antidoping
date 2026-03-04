@@ -1,0 +1,155 @@
+.page {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+
+ion-header ion-toolbar {
+  --background: var(--color-azul);
+  --color: #ffffff;
+}
+
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header-logo {
+  height: 34px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logout-button {
+  --padding-start: 8px;
+  --padding-end: 8px;
+  --color: #ffffff;
+  color: #ffffff;
+}
+
+.logout-button ion-icon {
+  font-size: 22px;
+  color: inherit;
+}
+
+.capture-card {
+  width: 100%;
+  max-width: 520px;
+  border-radius: 1rem;
+}
+
+.subtitle {
+  margin: 0.25rem 0 1rem 0;
+  color: var(--ion-color-step-600, #6b7280);
+}
+
+.folio-group {
+  margin-top: 0.75rem;
+}
+
+.folio-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  color: var(--ion-text-color, #111827);
+}
+
+.folio-input {
+  width: 100%;
+  background: rgba(17, 24, 39, 0.03);
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  border-radius: 0.9rem;
+  outline: none;
+  color: var(--ion-text-color, #111827);
+}
+
+.folio-input:focus {
+  border-color: rgba(11, 58, 106, 0.55);
+  box-shadow: 0 0 0 3px rgba(11, 58, 106, 0.15);
+}
+
+.folio-status {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--ion-color-step-600, #6b7280);
+}
+
+.folio-details {
+  margin-top: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background: rgba(17, 24, 39, 0.03);
+  color: var(--ion-text-color, #111827);
+}
+
+.file-input {
+  display: none;
+}
+
+.actions {
+  margin-top: 0.5rem;
+}
+
+.actions ion-button + ion-button {
+  margin-top: 0.5rem;
+}
+
+ion-button.primary {
+  --border-radius: 0.9rem;
+}
+
+ion-button.secondary {
+  --border-radius: 0.9rem;
+}
+
+.error {
+  margin-top: 0.75rem;
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.success {
+  margin-top: 0.75rem;
+  color: #166534;
+  font-weight: 600;
+}
+
+.preview {
+  margin-top: 1rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 1px solid rgba(17, 24, 39, 0.08);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+}
+
+.empty {
+  margin-top: 1rem;
+  padding: 1.25rem;
+  border-radius: 1rem;
+  background: rgba(17, 24, 39, 0.03);
+  color: var(--ion-color-step-600, #6b7280);
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  .folio-input {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .folio-details {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .empty {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
